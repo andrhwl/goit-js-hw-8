@@ -1,4 +1,3 @@
-
 import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.feedback-form');
@@ -25,12 +24,19 @@ window.addEventListener('DOMContentLoaded', () => {
     messageInput.value = formState.message || ''
 });
 
-btnSubmit.addEventListener('click', (e) => {
-  e.defaultPrevented
-  const emailValue = emailInput.value;
-  const messageValue = messageInput.value;
-  console.log({ email: emailValue, message: messageValue });
-  localStorage.removeItem('feedback-form-state')
-  emailInput.value = ''
-  messageInput.value = ''
-} )
+function clearData(evt){
+  evt.preventDefault();
+  const clearDataStorage = localStorage.getItem(LOCAL_KEY);
+  const clearDataStorageJSON = JSON.parse(clearDataStorage);
+  if(areaMsg.value ==="" || inputEmail.value ===""){
+      alert("Input required!");
+     return;
+  }else{
+     console.log(clearDataStorageJSON);
+  }
+ 
+  localStorage.removeItem(LOCAL_KEY);
+  form.reset();
+  delete dataStorage.email;
+  delete dataStorage.message;
+};
